@@ -189,7 +189,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="form-group">
 							<!-- <label class="col-md-2 control-label">Select Image</label> -->
 							<div class="col-md-8 col-md-push-1">
-								<input type="file" id="file-upload" class="form-condtrol1" style="margin-bottom: 10px;">
+								<input onchange="readFiles()"  multiple="true"  accept="image/jpeg,image/png"type="file" id="file-upload" class="form-condtrol1" style="margin-bottom: 10px;">
 								<button type="submit" class="p-10 btn btn-info btn-sm">Add</button>
 
 							</div>
@@ -375,18 +375,77 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		} else {
 			window.location.replace("signin.html")
 		}
+
+		const photos = [];
+
+const readFiles = async () => {
+	await new Promise(async (resolve, reject) => {
+
+		const target = event.target.files;
+
+		for (let i = 0; i < target.length; i++) {
+			const imageData = new FileReader();
+			if (target[i] && target[i].type.startsWith("image")) {
+				imageData.readAsDataURL(target[i]);
+
+				imageData.onload = (e) => {
+					console.log(e.target.result)
+					photos.push(e.target.result)
+				};
+
+				imageData.onloadend = () => {
+
+					return resolve({
+						photos
+					})
+				}
+
+			} else {
+				alert('File must be an image')
+				return
+			}
+
+		}
+
+
+	})
+	console.log(photos.length)
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 		const formprop = document.querySelector('#form-submit');
 
 
 		formprop.addEventListener('submit', event => {
 			event.preventDefault();
 
-			const image = document.getElementById("file-upload");
+			// const image = document.getElementById("file-upload");
+			const images = photos;
+			
+
 			const data = {
-				name: "transformation",
-				image
+				name:"tars",
+				images, 
 
 			}
+			
 
 			var url = `${serverurl}/api/v1/transformation/create`
 
