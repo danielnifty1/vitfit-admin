@@ -183,14 +183,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				<!--gallery-->
 				<div class="row">
 
-
+					<h4 id="msg" style="text-align: center;">sss</h4>
 					<form action="" id="form-submit" enctype="multipart/form-data">
 
 						<div class="form-group">
 							<!-- <label class="col-md-2 control-label">Select Image</label> -->
-							<div class="col-md-8 col-md-push-1">
-								<input onchange="readFiles()"  multiple="true"  accept="image/jpeg,image/png"type="file" id="file-upload" class="form-condtrol1" style="margin-bottom: 10px;">
-								<button type="submit" class="p-10 btn btn-info btn-sm">Add</button>
+							<div class="col-md-8 col-sm-12 col-xs-6 col-xs-push-2 col-md-push-2 col-sm-push-7 mt-20">
+								<input onchange="readFiles()"  multiple="true"  accept="image/jpeg,image/png"type="file" id="file-upload" class="form-condtrol1 mt-10" style="margin-bottom: 10px;">
+								<button type="submit" class=" btn btn-info btn-sm ">Add</button>
 
 							</div>
 
@@ -409,26 +409,11 @@ const readFiles = async () => {
 
 
 	})
-	console.log(photos.length)
+	console.log(photos)
 
 
 
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 		const formprop = document.querySelector('#form-submit');
 
@@ -436,23 +421,24 @@ const readFiles = async () => {
 		formprop.addEventListener('submit', event => {
 			event.preventDefault();
 
-			// const image = document.getElementById("file-upload");
 			const images = photos;
-			
+			photos.push({name:'transformation'})
 
 			const data = {
-				name:"tars",
-				images, 
+				name:'transformation',
+				images 
 
 			}
 			
 
 			var url = `${serverurl}/api/v1/transformation/create`
-
+			// console.log(photos)
 			fetch(url, {
 				method: 'POST',  // body: JSON.stringify(),
 				headers,
-				body: JSON.stringify(data),
+				body: JSON.stringify(
+					data,
+					),
 
 			}).then(res => res.json())
 				.then(data => {
@@ -463,7 +449,7 @@ const readFiles = async () => {
 					// ("msg").innerHTML = ;
 					// console.log(data)
 					if (data && data.success == false) {
-						console.log("not auth")
+						// console.log("not auth")
 						throw data
 						//     submitbtnbefore.style.display="block";
 						// submitbtnafter.style.display="none";
@@ -477,13 +463,15 @@ const readFiles = async () => {
 				.catch(error => {
 					// submitbtnbefore.style.display="block";
 					// submitbtnafter.style.display="none";
-					console.log(error)
-					// document.getElementById("msg").innerHTML = error.Error?error.Error:"Network error";
-					// if (error && error.status == 403 || error.Error === "Token is expired" || error.status == 401) {
-					//     sessionStorage.removeItem("ozubulu")
-					//     location.replace("sign-up.html")
+					// console.log(error)
+					document.getElementById("msg").innerHTML = error.Error?error.Error:"Network error";
+					if (error && error.status == 403 || error.Error === "Token is expired" || error.status == 401) {
+					document.getElementById("msg").innerHTML = error.Error?error.Error:"Login Again";
 
-					// }
+					    sessionStorage.removeItem("ozubulu")
+					    location.replace("signin.html")
+
+					}
 				}
 				)
 
