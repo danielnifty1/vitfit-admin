@@ -72,23 +72,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			<!-- Brand and toggle get grouped for better mobile display -->
 
 			<!-- Collect the nav links, forms, and other content for toggling -->
-			<div class="drop-men">
-				<ul class=" nav_1">
-
-
-					<li class="dropdown">
-						<a href="#" class="dropdown-toggle dropdown-at" data-toggle="dropdown"><span
-								class=" name-caret">Rackham<i class="caret"></i></span><img src="images/wo.jpg"></a>
-						<ul class="dropdown-menu " role="menu">
-							<li><a href="profile.html"><i class="fa fa-user"></i>Edit Profile</a></li>
-							<li><a href="inbox.html"><i class="fa fa-envelope"></i>Inbox</a></li>
-							<li><a href="calendar.html"><i class="fa fa-calendar"></i>Calender</a></li>
-							<li><a href="inbox.html"><i class="fa fa-clipboard"></i>Tasks</a></li>
-						</ul>
-					</li>
-
-				</ul>
-			</div><!-- /.navbar-collapse -->
+			
 			<div class="clearfix">
 
 			</div>
@@ -145,7 +129,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</li>
 
 						<li>
-							<a href="trainer.html" class=" hvr-bounce-to-right"><i class="fa fa-users nav_icon"></i>
+							<a href="members.html" class=" hvr-bounce-to-right"><i class="fa fa-users nav_icon"></i>
 								<span class="nav-label">Members</span> </a>
 						</li>
 
@@ -155,10 +139,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 							<a href="#" class=" hvr-bounce-to-right"><i class="fa fa-cog nav_icon"></i> <span
 									class="nav-label">Settings</span><span class="fa arrow"></span></a>
 							<ul class="nav nav-second-level">
-								<li><a href="signin.html" class=" hvr-bounce-to-right"><i
+								<li><a onclick="logout()" class=" hvr-bounce-to-right"><i
 											class="fa fa-sign-in nav_icon"></i>Signin</a></li>
-								<li><a href="signup.html" class=" hvr-bounce-to-right"><i
-											class="fa fa-sign-in nav_icon"></i>Singup</a></li>
+								
 							</ul>
 						</li>
 					</ul>
@@ -181,15 +164,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 				</div>
 				<!--//banner-->
 				<!--gallery-->
+				<img id="img" style="display: none;">
+				<textarea id="theStream" style="display: none;"></textarea>
 				<div class="row">
 
-					<h4 id="msg" style="text-align: center;">sss</h4>
+					<h6 id="msg" style="text-align: center;"></h6>
 					<form action="" id="form-submit" enctype="multipart/form-data">
 
 						<div class="form-group">
 							<!-- <label class="col-md-2 control-label">Select Image</label> -->
 							<div class="col-md-8 col-sm-12 col-xs-6 col-xs-push-2 col-md-push-2 col-sm-push-7 mt-20">
-								<input onchange="readFiles()"  multiple="true"  accept="image/jpeg,image/png"type="file" id="file-upload" class="form-condtrol1 mt-10" style="margin-bottom: 10px;">
+								<input onchange="readFiles()" multiple="true" accept="image/jpeg,image/png" type="file"
+									id="file-upload" class="form-condtrol1 mt-10" style="margin-bottom: 10px;">
 								<button type="submit" class=" btn btn-info btn-sm ">Add</button>
 
 							</div>
@@ -200,139 +186,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						</div>
 					</form>
 				</div>
-				<div class="gallery">
-					<div class="col-md">
-						<div class="gallery-img">
-							<a href="images/ga.jpg" class="b-link-stripe b-animate-go  swipebox" title="Image Title">
-								<img class="img-responsive " src="images/ga.jpg" alt="" />
-								<span class="zoom-icon"> </span> </a>
-							</a>
-						</div>
-						<div class="text-gallery">
-							<h6>Lorem ipsum</h6>
-						</div>
+				<div class="gallery" id="transform">
+					
 					</div>
-					<div class="col-md">
-						<div class="gallery-img">
-							<a href="images/ga1.jpg" class="b-link-stripe b-animate-go  swipebox" title="Image Title">
-								<img class="img-responsive " src="images/ga1.jpg" alt="" />
-								<span class="zoom-icon"> </span> </a>
-							</a>
-						</div>
-						<div class="text-gallery">
-							<h6>Lorem ipsum</h6>
-						</div>
-					</div>
-					<div class="col-md">
-						<div class="gallery-img">
-							<a href="images/ga2.jpg" class="b-link-stripe b-animate-go  swipebox" title="Image Title">
-								<img class="img-responsive " src="images/ga2.jpg" alt="" />
-								<span class="zoom-icon"> </span> </a>
-							</a>
-						</div>
-						<div class="text-gallery">
-							<h6>Lorem ipsum</h6>
-						</div>
-					</div>
-					<div class="col-md">
-						<div class="gallery-img">
-							<a href="images/ga3.jpg" class="b-link-stripe b-animate-go  swipebox" title="Image Title">
-								<img class="img-responsive " src="images/ga3.jpg" alt="" />
-								<span class="zoom-icon"> </span> </a>
-							</a>
-						</div>
-						<div class="text-gallery">
-							<h6>Lorem ipsum</h6>
-						</div>
-					</div>
-					<div class="col-md">
-						<div class="gallery-img">
-							<a href="images/ga4.jpg" class="b-link-stripe b-animate-go  swipebox" title="Image Title">
-								<img class="img-responsive " src="images/ga4.jpg" alt="" />
-								<span class="zoom-icon"> </span> </a>
-							</a>
-						</div>
-						<div class="text-gallery">
-							<h6>Lorem ipsum</h6>
-						</div>
-					</div>
-					<div class="col-md">
-						<div class="gallery-img">
-							<a href="images/ga5.jpg" class="b-link-stripe b-animate-go  swipebox" title="Image Title">
-								<img class="img-responsive " src="images/ga5.jpg" alt="" />
-								<span class="zoom-icon"> </span> </a>
-							</a>
-						</div>
-						<div class="text-gallery">
-							<h6>Lorem ipsum</h6>
-						</div>
-					</div>
-					<div class="col-md">
-						<div class="gallery-img">
-							<a href="images/ga6.jpg" class="b-link-stripe b-animate-go  swipebox" title="Image Title">
-								<img class="img-responsive " src="images/ga6.jpg" alt="" />
-								<span class="zoom-icon"> </span> </a>
-							</a>
-						</div>
-						<div class="text-gallery">
-							<h6>Lorem ipsum</h6>
-						</div>
-					</div>
-					<div class="col-md">
-						<div class="gallery-img">
-							<a href="images/ga7.jpg" class="b-link-stripe b-animate-go  swipebox" title="Image Title">
-								<img class="img-responsive " src="images/ga7.jpg" alt="" />
-								<span class="zoom-icon"> </span> </a>
-							</a>
-						</div>
-						<div class="text-gallery">
-							<h6>Lorem ipsum</h6>
-						</div>
-					</div>
-					<div class="col-md">
-						<div class="gallery-img">
-							<a href="images/ga8.jpg" class="b-link-stripe b-animate-go  swipebox" title="Image Title">
-								<img class="img-responsive " src="images/ga8.jpg" alt="" />
-								<span class="zoom-icon"> </span> </a>
-							</a>
-						</div>
-						<div class="text-gallery">
-							<h6>Lorem ipsum</h6>
-						</div>
-					</div>
-					<div class="col-md">
-						<div class="gallery-img">
-							<a href="images/ga2.jpg" class="b-link-stripe b-animate-go  swipebox" title="Image Title">
-								<img class="img-responsive " src="images/ga2.jpg" alt="" />
-								<span class="zoom-icon"> </span> </a>
-							</a>
-						</div>
-						<div class="text-gallery">
-							<h6>Lorem ipsum</h6>
-						</div>
-					</div>
-					<div class="col-md">
-						<div class="gallery-img">
-							<a href="images/ga4.jpg" class="b-link-stripe b-animate-go  swipebox" title="Image Title">
-								<img class="img-responsive " src="images/ga4.jpg" alt="" />
-								<span class="zoom-icon"> </span> </a>
-							</a>
-						</div>
-						<div class="text-gallery">
-							<h6>Lorem ipsum</h6>
-						</div>
-					</div>
-					<div class="col-md">
-						<div class="gallery-img">
-							<a href="images/ga1.jpg" class="b-link-stripe b-animate-go  swipebox" title="Image Title">
-								<img class="img-responsive " src="images/ga1.jpg" alt="" />
-								<span class="zoom-icon"> </span> </a>
-							</a>
-						</div>
-						<div class="text-gallery">
-							<h6>Lorem ipsum</h6>
-						</div>
-					</div>
+				
 
 					<div class="clearfix"> </div>
 				</div>
@@ -346,23 +203,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		</div>
 		<div class="clearfix"> </div>
 	</div>
-
+	<button id="transbutton" onclick="loader()"></button>
 	<!---->
 	<link rel="stylesheet" href="css/swipebox.css">
 	<script src="js/jquery.swipebox.min.js"></script>
-		<script src="js/server.js"></script>
-		<script src="js/session.js"></script>
-
-
-	<script type="text/javascript">
-		jQuery(function ($) {
-			$(".swipebox").swipebox();
-		});
-	</script>
-	<!--scrolling js-->
-	<script src="js/jquery.nicescroll.js"></script>
-	<script src="js/scripts.js"></script>
-	<!--//scrolling js-->
+	<script src="js/server.js"></script>
+	<script src="js/session.js"></script>
 
 	<script>
 
@@ -376,44 +222,128 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			window.location.replace("signin.html")
 		}
 
-		const photos = [];
 
-const readFiles = async () => {
-	await new Promise(async (resolve, reject) => {
+	</script>
 
-		const target = event.target.files;
+	<script type="text/javascript">
+		jQuery(function ($) {
+			$(".swipebox").swipebox();
+		});
+	</script>
+	<!--scrolling js-->
+	<script src="js/jquery.nicescroll.js"></script>
+	<script src="js/scripts.js"></script>
+	<script src="js/server.js"></script>
+	<script src="js/session.js"></script>
+	<script src="js/transformation.js"></script>
 
-		for (let i = 0; i < target.length; i++) {
-			const imageData = new FileReader();
-			if (target[i] && target[i].type.startsWith("image")) {
-				imageData.readAsDataURL(target[i]);
+	<!--//scrolling js-->
 
-				imageData.onload = (e) => {
-					console.log(e.target.result)
-					photos.push(e.target.result)
-				};
 
-				imageData.onloadend = () => {
 
-					return resolve({
-						photos
-					})
-				}
+<script>
 
-			} else {
-				alert('File must be an image')
-				return
-			}
+</script>
 
+	<script>
+		onload = async function () {
+			document.getElementById("transbutton").click();
 		}
 
 
-	})
-	console.log(photos)
+		async function loader() {
+
+			var url = `${serverurl}/api/v1/transformation/`
+			// console.log(data)
+			fetch(url, {
+				method: 'GET',  // body: JSON.stringify(),
+				headers,
+
+			})
+				.then((res) => {
+					return res.json();
+				})
+				.then((completeservicedata) => {
+
+					const info = completeservicedata.data
+					const dispalyLenght = completeservicedata.data.length
+					let dataApproach = "";
+
+
+					let approachesProperty = [...info]
+
+					const approahesDisplayed = approachesProperty.splice(approachesProperty.length - Math.round((approachesProperty.length / 1)), approachesProperty.length)
+					const approahesDisplayed2 = approachesProperty.splice()
+
+					//  console.log("this is "+approachesProperty)
+
+					approahesDisplayed.map((vals) => {
+						console.log(vals.image.url)
+						dataApproach += ` 
+						
+					<div class="col-md">
+						<div class="gallery-img">
+							<a id="del${vals._id}" onclick="del()" class="b-link-stripe b-animate-go  swipebox" title="Delete">
+								<img class="img-responsive " src="${vals.image.url}" alt="" />
+								<span class="zoom-icon"> </span> </a>
+							</a>
+							
+						</div>
+						<div class="text-gallery">
+							<a href="process.html?transformation=${vals._id}">Delete</a>
+						</div> 
+					</div>
+						
+				<form>
+
+					
+			`
+
+			
+						// progama.innerHTML=dataApproach;
+					})
+					document.getElementById('transform').innerHTML = dataApproach
+					
+				},
+
+
+				)
+
+		}
+
+	</script>
 
 
 
-}
+
+	<!-- UPLOADING TRANSFORMATION -->
+	<script>
+		let imageFile = document.getElementById("file-upload");
+
+		imageFile.onchange = function () {
+			img.src = URL.createObjectURL(imageFile.files[0])
+
+
+		}
+
+		// ===============================
+		img.crossOrigin = 'anonymous'
+		img.onload = async function () {
+
+			await new Promise(
+				async (resolve, reject) => {
+					var canvas = document.createElement('canvas');
+					var ctx = canvas.getContext('2d');
+					canvas.height = this.naturalHeight;
+					canvas.width = this.naturalWidth;
+					ctx.drawImage(this, 0, 0);
+					var image = canvas.toDataURL('image/jpeg');
+
+					document.getElementById('theStream').value = image;
+
+				}
+			)
+		}
 
 		const formprop = document.querySelector('#form-submit');
 
@@ -421,55 +351,43 @@ const readFiles = async () => {
 		formprop.addEventListener('submit', event => {
 			event.preventDefault();
 
-			const images = photos;
-			photos.push({name:'transformation'})
+			const image = document.getElementById('theStream').value;
 
-			const data = {
-				name:'transformation',
-				images 
 
-			}
-			
+			const data = [
+				{ name: 'transformation', image }
+			]
+
 
 			var url = `${serverurl}/api/v1/transformation/create`
-			// console.log(photos)
+			console.log(data)
 			fetch(url, {
 				method: 'POST',  // body: JSON.stringify(),
 				headers,
-				body: JSON.stringify(
-					data,
-					),
+				body: JSON.stringify(data)
 
 			}).then(res => res.json())
 				.then(data => {
-					console.log(data)
-					// submitbtnbefore.style.display="none";
-					// submitbtnafter.style.display="block";
 
-					// ("msg").innerHTML = ;
-					// console.log(data)
 					if (data && data.success == false) {
-						// console.log("not auth")
+
 						throw data
-						//     submitbtnbefore.style.display="block";
-						// submitbtnafter.style.display="none";
+
 					}
-					// document.getElementById("msg").innerHTML = data.message;
-					alert("Successfully added property")
-					// submitbtnbefore.style.display="block";
-					// submitbtnafter.style.display="none";
+
+					document.getElementById("msg").innerHTML = data.message
+					document.getElementById("transbutton").click();
+
 					formprop.reset()
 				})
 				.catch(error => {
-					// submitbtnbefore.style.display="block";
-					// submitbtnafter.style.display="none";
-					// console.log(error)
-					document.getElementById("msg").innerHTML = error.Error?error.Error:"Network error";
-					if (error && error.status == 403 || error.Error === "Token is expired" || error.status == 401) {
-					document.getElementById("msg").innerHTML = error.Error?error.Error:"Login Again";
 
-					    sessionStorage.removeItem("ozubulu")
-					    location.replace("signin.html")
+					document.getElementById("msg").innerHTML = error.Error ? error.Error : "Network error";
+					if (error && error.status == 403 || error.Error === "Token is expired" || error.status == 401) {
+						document.getElementById("msg").innerHTML = error.Error ? error.Error : "Login Again";
+
+						sessionStorage.removeItem("ozubulu")
+						location.replace("signin.html")
 
 					}
 				}

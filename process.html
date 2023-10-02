@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html>
+    <body>
+
+        <script src="js/server.js"></script>
+        <script src="js/session.js"></script>
+    
+        <script>
+    
+            if (isLoggedIn) {
+                headers = {
+                    authorization: `Bearer ${JSON.parse(isLoggedIn)}`,
+                    'Content-Type': 'application/json;charset=UTF-8',
+                }
+                // console.log(headers)
+            } else {
+                window.location.replace("signin.html")
+            }
+    
+    
+        </script>
+
+
+        <script>
+            
+const queryString = window.location.search;
+// console.log(queryString);
+
+const urlParams = new URLSearchParams(queryString);
+
+
+if(urlParams.get('transformation')){
+const transformation = urlParams.get('transformation')
+var url = `${serverurl}/api/v1/transformation/delete/${transformation}`
+			fetch(url, {
+				method: 'Get',  // body: JSON.stringify(),
+				headers,
+			}).then((res) => {
+					location.replace('transformation.html')
+				})}
+
+
+                if(urlParams.get('gallery')){
+const gallery = urlParams.get('gallery')
+var url = `${serverurl}/api/v1/gallery/delete/${gallery}`
+			fetch(url, {
+				method: 'Get',  // body: JSON.stringify(),
+				headers,
+			}).then((res) => {
+					location.replace('gallery.html')
+				})}
+
+
+
+                if(urlParams.get('approach')){
+const approach = urlParams.get('approach')
+console.log(approach)
+var url = `${serverurl}/api/v1/approach/delete/${approach}`
+			fetch(url, {
+				method: 'Get',  // body: JSON.stringify(),
+				headers,
+			}).then((res) => {
+					location.replace('approaches.html')
+				})}
+
+                if(urlParams.get('service')){
+const service = urlParams.get('service')
+console.log(service)
+var url = `${serverurl}/api/v1/service/delete/${service}`
+			fetch(url, {
+				method: 'Get',  // body: JSON.stringify(),
+				headers,
+			}).then((res) => {
+					location.replace('services.html')
+				})}
+
+
+
+                
+                if(urlParams.get('member')){
+const member = urlParams.get('member')
+console.log(member)
+var url = `${serverurl}/api/v1/user/delete/${member}`
+			fetch(url, {
+				method: 'Get',  // body: JSON.stringify(),
+				headers,
+			}).then((res) => {
+					location.replace('members.html')
+				})}
+
+        </script>
+    </body>
+</html>

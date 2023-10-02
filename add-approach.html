@@ -71,23 +71,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <!-- Brand and toggle get grouped for better mobile display -->
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="drop-men">
-                    <ul class=" nav_1">
-
-                     
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle dropdown-at" data-toggle="dropdown"><span
-                                    class=" name-caret">Rackham<i class="caret"></i></span><img src="images/wo.jpg"></a>
-                            <ul class="dropdown-menu " role="menu">
-                                <li><a href="profile.html"><i class="fa fa-user"></i>Edit Profile</a></li>
-                                <li><a href="inbox.html"><i class="fa fa-envelope"></i>Inbox</a></li>
-                                <li><a href="calendar.html"><i class="fa fa-calendar"></i>Calender</a></li>
-                                <li><a href="inbox.html"><i class="fa fa-clipboard"></i>Tasks</a></li>
-                            </ul>
-                        </li>
-
-                    </ul>
-                </div><!-- /.navbar-collapse -->
+             
                 <div class="clearfix">
 
                 </div>
@@ -144,7 +128,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </li>
 
                             <li>
-                                <a href="trainer.html" class=" hvr-bounce-to-right"><i class="fa fa-users nav_icon"></i>
+                                <a href="members.html" class=" hvr-bounce-to-right"><i class="fa fa-users nav_icon"></i>
                                     <span class="nav-label">Members</span> </a>
                             </li>
 
@@ -154,10 +138,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <a href="#" class=" hvr-bounce-to-right"><i class="fa fa-cog nav_icon"></i> <span
                                         class="nav-label">Settings</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
-                                    <li><a href="signin.html" class=" hvr-bounce-to-right"><i
+                                    <li><a onclick="logout()" class=" hvr-bounce-to-right"><i
                                                 class="fa fa-sign-in nav_icon"></i>Signin</a></li>
-                                    <li><a href="signup.html" class=" hvr-bounce-to-right"><i
-                                                class="fa fa-sign-in nav_icon"></i>Singup</a></li>
+                                    
                                 </ul>
                             </li>
                         </ul>
@@ -188,6 +171,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <label class="col-md-6 col-md-push-   control-label">Add New Approach</label>
 
                                 </div>
+                                <h6 id="msg" style="text-align: center; margin-bottom: 20px;"></h6>
 
                                 <div class="form-group pt-10">
                                     <label class="col-md-2 control-label">approach Title</label>
@@ -205,7 +189,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <div class="col-md-8">
                                         <div class="input-group">
                                            
-                                            <textarea class="form-control1" id="note" name="note"></textarea>
+                                            <textarea id="note" class="form-control1" id="note" name="note"></textarea>
                                           
                                         </div>
                                     </div>
@@ -215,7 +199,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <div class="form-group">
                                     <label class="col-md-2 control-label">Select Image</label>
                                     <div class="col-md-8">
-                                    <input type="file" id="exampleInputFile" class="form-condtrol1" id="images" name="images">
+                                    <input type="file" id="file-upload" onchange="readFiles()"  accept="image/jpeg,image/png"  class="form-condtrol1"  name="images">
                                     <p class="help-block">Example block-level help text here.</p>
                                 </div>
                                 </div>
@@ -242,7 +226,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         </div>
         <div class="clearfix"> </div>
     </div>
-
+    <img id="img" style="display: none;">
+        <textarea id="theStream" style="display: none;"></textarea>
+        <button id="transbutton" onclick="loader()"></button>
     <!---->
     <!--scrolling js-->
     <script src="js/jquery.nicescroll.js"></script>
@@ -259,64 +245,124 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			}
 			// console.log(headers)
 		} else {
-			window.location.replace("sign-in.html")
+			window.location.replace("signin.html")
 		}
-		const formprop = document.querySelector('#form-submit');
-
-
-		formprop.addEventListener('submit', event => {
-			event.preventDefault();
-
-			const image = document.getElementById("file-upload");
-			const data = {
-				name: "transformation",
-				image
-
-			}
-
-			var url = `${serverurl}/api/v1/transformation/create`
-
-			fetch(url, {
-				method: 'POST',  // body: JSON.stringify(),
-				headers,
-				body: JSON.stringify(data),
-
-			}).then(res => res.json())
-				.then(data => {
-					console.log(data)
-					// submitbtnbefore.style.display="none";
-					// submitbtnafter.style.display="block";
-
-					// ("msg").innerHTML = ;
-					// console.log(data)
-					if (data && data.success == false) {
-						console.log("not auth")
-						throw data
-						//     submitbtnbefore.style.display="block";
-						// submitbtnafter.style.display="none";
-					}
-					// document.getElementById("msg").innerHTML = data.message;
-					alert("Successfully added property")
-					// submitbtnbefore.style.display="block";
-					// submitbtnafter.style.display="none";
-					formprop.reset()
-				})
-				.catch(error => {
-					// submitbtnbefore.style.display="block";
-					// submitbtnafter.style.display="none";
-					console.log(error)
-					// document.getElementById("msg").innerHTML = error.Error?error.Error:"Network error";
-					// if (error && error.status == 403 || error.Error === "Token is expired" || error.status == 401) {
-					//     sessionStorage.removeItem("ozubulu")
-					//     location.replace("sign-up.html")
-
-					// }
-				}
-				)
-
-
-		})
+	
 	</script>
+      <!-- UPLOADING TRANSFORMATION -->
+      <script type="text/javascript">
+        // ("msg").innerHTML =" data.message;"
+ 
+
+
+        const photos = [];
+
+        const readFiles = async () => {
+            await new Promise(async (resolve, reject) => {
+
+                const target = event.target.files;
+
+                for (let i = 0; i < target.length; i++) {
+                    const imageData = new FileReader();
+                    if (target[i] && target[i].type.startsWith("image")) {
+                        imageData.readAsDataURL(target[i]);
+
+                        imageData.onload = (e) => {
+                            console.log(e.target.result)
+                            photos.push(e.target.result)
+                        };
+
+                        imageData.onloadend = () => {
+
+                            return resolve({
+                                photos
+                            })
+                        }
+
+                    } else {
+                        alert('File must be an image')
+                        return
+                    }
+
+                }
+
+
+            })
+            console.log(photos)
+
+
+
+        }
+
+
+        const formprop = document.querySelector('#form-submit');
+
+
+        formprop.addEventListener('submit', event => {
+            event.preventDefault();
+
+                        // submitbtnbefore.style.display="none";
+                        // submitbtnafter.style.display="block";
+
+          
+  
+                const note = document.getElementById("note").value
+                const title = document.getElementById("title").value
+                const file_upload = document.getElementById("file-upload"); 
+              
+                const images = photos;
+
+                    const data = [{
+                       
+                        title,
+                        note,
+                        images
+                    }]
+                console.log(data)
+                document.getElementById("msg").innerHTML = ""; 
+            //    var url="https://dynamicserver.onrender.com/api/v1/property"
+            var url=`${serverurl}/api/v1/approach/create`
+
+                fetch(url, {
+                    method: 'POST',  // body: JSON.stringify(),
+                    headers,
+                    body: JSON.stringify(data),
+
+                }).then(res => res.json())
+                    .then(data => {
+                        console.log(data)
+                        // submitbtnbefore.style.display="none";
+                        // submitbtnafter.style.display="block";
+                        
+                        // ("msg").innerHTML = ;
+                        // console.log(data)
+                        if (data && data.success == false) {
+                            console.log("not auth")
+                            throw data
+                        //     submitbtnbefore.style.display="block";
+                        // submitbtnafter.style.display="none";
+                        }
+                        document.getElementById("msg").innerHTML = data.message;
+                        // alert("Successfully added property")
+                        // submitbtnbefore.style.display="block";
+                        // submitbtnafter.style.display="none";
+                        formprop.reset()
+                    })
+                    .catch(error => {
+                        // submitbtnbefore.style.display="block";
+                        // submitbtnafter.style.display="none";
+                        console.log(error)
+                        document.getElementById("msg").innerHTML = error.Error?error.Error:"Network error";
+                        if (error && error.status == 403 || error.Error === "Token is expired" || error.status == 401) {
+                            sessionStorage.removeItem("ozubulu")
+                            location.replace("signin.html")
+                           
+                        }
+                    }
+                    )
+            
+        })
+    </script>
 </body>
 
 </html>

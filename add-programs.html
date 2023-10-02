@@ -71,7 +71,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <!-- Brand and toggle get grouped for better mobile display -->
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
-          
+            
                 <div class="clearfix">
 
                 </div>
@@ -155,7 +155,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <h2>
                         <a href="index.html">Home</a>
                         <i class="fa fa-angle-right"></i>
-                        <span>The Trainer</span>
+                        <span>Add Programs</span>
                     </h2>
                 </div>
                 <!--//banner-->
@@ -166,26 +166,30 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     <div class="blank-page">
 
                         <div class="panel-body">
-                            <form role="form" id="form-submit" class="form-horizontal">
+                            <form role="form" class="form-horizontal" id="form-submit">
                                 <div class="row" style="margin-bottom: 20px;">
-                                <label class="col-md-6 col-md-push-   control-label">THE TRAINER</label>
-
+                                <label class="col-md-6 col-md-push-   control-label">Add New Program</label>
 
                                 </div>
-<h6 style="text-align: center;margin-bottom: 20px;" id="msg"></h6>
-<div class="row"> 
-    <div class="form-group col-md-6 col-md-push-4">
-        <img id="img2" style="width: 200px; height: 150px;border-radius: 20px;" >
-        </div>
-</div>
+                                <h6 id="msg" style="text-align: center; margin-bottom: 20px;"></h6>
 
-                              
+                                <div class="form-group pt-10">
+                                    <label class="col-md-2 control-label">Program Title</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-th"></i>
+                                            </span>
+                                            <input type="text" class="form-control1" id="title" name="title" placeholder="Title">
+                                        </div>
+                                    </div>
+                                </div>
                                 <div class="form-group">
-                                    <label class="col-md-2 control-label">About The Trainer</label>
+                                    <label class="col-md-2 control-label">Program</label>
                                     <div class="col-md-8">
                                         <div class="input-group">
                                            
-                                            <textarea class="form-control1" id="note"></textarea>
+                                            <textarea id="note" class="form-control1" id="note" name="note"></textarea>
                                           
                                         </div>
                                     </div>
@@ -193,9 +197,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
                                 <div class="form-group">
-                                    <label class="col-md-2 control-label">Trainer Image</label>
+                                    <label class="col-md-2 control-label">Select Image</label>
                                     <div class="col-md-8">
-                                    <input type="file" id="file-upload" class="form-condtrol1" >
+                                    <input type="file" id="file-upload" onchange="readFiles()"  accept="image/jpeg,image/png"  class="form-condtrol1"  name="images">
                                     <p class="help-block">Example block-level help text here.</p>
                                 </div>
                                 </div>
@@ -221,12 +225,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </div>
         <div class="clearfix"> </div>
-        <img id="img" style="display: none;">
-        <textarea id="theStream" style="display:none ;"></textarea>
-        <input id="_id" >
-        <button id="transbutton" onclick="loader()"></button>
     </div>
-
+    <img id="img" style="display: none;">
+        <textarea id="theStream" style="display: none;"></textarea>
+        <button id="transbutton" onclick="loader()"></button>
     <!---->
     <!--scrolling js-->
     <script src="js/jquery.nicescroll.js"></script>
@@ -234,136 +236,132 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <script src="js/server.js"></script>
 	<script src="js/session.js"></script>
     <!--//scrolling js-->
+    <script>
 
-    	<!-- UPLOADING TRANSFORMATION -->
-	<script>
-//          function logout(){
-// alert("log")
-// }
-		let imageFile = document.getElementById("file-upload");
-
-		imageFile.onchange = function () {
-			img.src = URL.createObjectURL(imageFile.files[0])
-            document.getElementById('img2').src = URL.createObjectURL(imageFile.files[0])
-
-
-
+		if (isLoggedIn) {
+			headers = {
+				authorization: `Bearer ${JSON.parse(isLoggedIn)}`,
+				'Content-Type': 'application/json;charset=UTF-8',
+			}
+			// console.log(headers)
+		} else {
+			window.location.replace("signin.html")
 		}
-
-		// ===============================
-		img.crossOrigin = 'anonymous'
-		img.onload = async function () {
-
-			await new Promise(
-				async (resolve, reject) => {
-					var canvas = document.createElement('canvas');
-					var ctx = canvas.getContext('2d');
-					canvas.height = this.naturalHeight;
-					canvas.width = this.naturalWidth;
-					ctx.drawImage(this, 0, 0);
-					var image = canvas.toDataURL('image/jpeg');
-
-					document.getElementById('theStream').value = image;
-                    
-console.log(image)
-				}
-			)
-		}
-
-
-
-
-		const formprop = document.querySelector('#form-submit');
-
-
-		formprop.addEventListener('submit', event => {
-			event.preventDefault();
-
-			const image = document.getElementById('theStream').value;
-			const note = document.getElementById('note').value;
-			const id = document.getElementById('_id').value;
-
-            // alert(id)
-
-
-			const data = 
-				{ note, image }
-			
-
-
-			var url = `${serverurl}/api/v1/about/update/${id}`
-			console.log(data)
-			fetch(url, {
-				method: 'PUT',  // body: JSON.stringify(),
-				headers,
-				body: JSON.stringify(data)
-
-			}).then(res => res.json())
-				.then(data => {
-
-					if (data && data.success == false) {
-						throw data
-					}
-					document.getElementById("msg").innerHTML = data.message
-					document.getElementById("transbutton").click();
-
-					formprop.reset()
-				})
-				.catch(error => {
-
-					document.getElementById("msg").innerHTML = error.Error ? error.Error : "Network error";
-					if (error && error.status == 403 || error.Error === "Token is expired" || error.status == 401) {
-						document.getElementById("msg").innerHTML = error.Error ? error.Error : "Login Again";
-
-						sessionStorage.removeItem("ozubulu")
-						location.replace("signin.html")
-
-					}
-				}
-				)
-
-
-		})
+	
 	</script>
+      <!-- UPLOADING TRANSFORMATION -->
+      <script type="text/javascript">
+        // ("msg").innerHTML =" data.message;"
+ 
 
 
-<script>
-    onload = async function () {
+        const photos = [];
 
-       
-        var url = `${serverurl}/api/v1/about/`
-        // console.log(data)
-        fetch(url, {
-            method: 'GET',  // body: JSON.stringify(),
-            headers,
+        const readFiles = async () => {
+            await new Promise(async (resolve, reject) => {
 
-        })
-            .then((res) => {
-                return res.json();
+                const target = event.target.files;
+
+                for (let i = 0; i < target.length; i++) {
+                    const imageData = new FileReader();
+                    if (target[i] && target[i].type.startsWith("image")) {
+                        imageData.readAsDataURL(target[i]);
+
+                        imageData.onload = (e) => {
+                            console.log(e.target.result)
+                            photos.push(e.target.result)
+                        };
+
+                        imageData.onloadend = () => {
+
+                            return resolve({
+                                photos
+                            })
+                        }
+
+                    } else {
+                        alert('File must be an image')
+                        return
+                    }
+
+                }
+
+
             })
-            .then((completeservicedata) => {
+            console.log(photos)
 
-                const info = completeservicedata.data
-                console.log(info.image.url)
 
-                
 
+        }
+
+
+        const formprop = document.querySelector('#form-submit');
+
+
+        formprop.addEventListener('submit', event => {
+            event.preventDefault();
+
+                        // submitbtnbefore.style.display="none";
+                        // submitbtnafter.style.display="block";
+
+          
+  
+                const note = document.getElementById("note").value
+                const title = document.getElementById("title").value
+                const file_upload = document.getElementById("file-upload"); 
               
-              
-                document.getElementById('note').innerHTML = info.note
-                document.getElementById('img2').src = info.image.url
-                document.getElementById('_id').value = info._id
+                const images = photos;
 
+                    const data = [{
+                       
+                        title,
+                        note,
+                        images
+                    }]
+                console.log(data)
+                document.getElementById("msg").innerHTML = ""; 
+            
+            var url=`${serverurl}/api/v1/program/create`
 
-
-            },
-
-
-            )
-
-    }
-
-</script>
+                fetch(url, {
+                    method: 'POST',  // body: JSON.stringify(),
+                    headers,
+                    body: JSON.stringify(data),
+                }).then(res => res.json())
+                    .then(data => {
+                        console.log(data)
+                        // submitbtnbefore.style.display="none";
+                        // submitbtnafter.style.display="block";
+                        
+                        // ("msg").innerHTML = ;
+                        // console.log(data)
+                        if (data && data.success == false) {
+                            console.log("not auth")
+                            throw data
+                        //     submitbtnbefore.style.display="block";
+                        // submitbtnafter.style.display="none";
+                        }
+                        document.getElementById("msg").innerHTML = data.message;
+                        // alert("Successfully added property")
+                        // submitbtnbefore.style.display="block";
+                        // submitbtnafter.style.display="none";
+                        formprop.reset()
+                    })
+                    .catch(error => {
+                        // submitbtnbefore.style.display="block";
+                        // submitbtnafter.style.display="none";
+                        console.log(error)
+                        document.getElementById("msg").innerHTML = error.Error?error.Error:"Network error";
+                        if (error && error.status == 403 || error.Error === "Token is expired" || error.status == 401) {
+                            sessionStorage.removeItem("ozubulu")
+                            location.replace("signin.html")
+                           
+                        }
+                    }
+                    )
+            
+        })
+    </script>
 </body>
 
 </html>

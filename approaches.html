@@ -68,9 +68,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             <div class=" border-bottom">
                 <div class="full-left">
                     <section class="full-top">
-                      <a href="add-approach.html">  <button id="toggle"><i class="fa fa-user-plus"></i></button></a>
+                        <a href="add-approach.html"> <button id="toggle"><i class="fa fa-user-plus"></i></button></a>
                     </section>
-                  
+
                     <div class="clearfix"> </div>
                 </div>
 
@@ -78,27 +78,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <!-- Brand and toggle get grouped for better mobile display -->
 
                 <!-- Collect the nav links, forms, and other content for toggling -->
-                <div class="drop-men">
-                    <ul class=" nav_1">
-
-                        <li class="dropdown at-drop">
-                            <a href="#" class="dropdown-toggle dropdown-at " data-toggle="dropdown"><i
-                                    class="fa fa-globe"></i> <span class="number">5</span></a>
-                            
-                        </li>
-                        <li class="dropdown">
-                            <a href="#" class="dropdown-toggle dropdown-at" data-toggle="dropdown"><span
-                                    class=" name-caret">Rackham<i class="caret"></i></span><img src="images/wo.jpg"></a>
-                            <ul class="dropdown-menu " role="menu">
-                                <li><a href="profile.html"><i class="fa fa-user"></i>Edit Profile</a></li>
-                                <li><a href="inbox.html"><i class="fa fa-envelope"></i>Inbox</a></li>
-                                <li><a href="calendar.html"><i class="fa fa-calendar"></i>Calender</a></li>
-                                <li><a href="inbox.html"><i class="fa fa-clipboard"></i>Tasks</a></li>
-                            </ul>
-                        </li>
-
-                    </ul>
-                </div><!-- /.navbar-collapse -->
+            
                 <div class="clearfix">
 
                 </div>
@@ -155,7 +135,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             </li>
 
                             <li>
-                                <a href="trainer.html" class=" hvr-bounce-to-right"><i class="fa fa-users nav_icon"></i>
+                                <a href="members.html" class=" hvr-bounce-to-right"><i class="fa fa-users nav_icon"></i>
                                     <span class="nav-label">Members</span> </a>
                             </li>
 
@@ -165,10 +145,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <a href="#" class=" hvr-bounce-to-right"><i class="fa fa-cog nav_icon"></i> <span
                                         class="nav-label">Settings</span><span class="fa arrow"></span></a>
                                 <ul class="nav nav-second-level">
-                                    <li><a href="signin.html" class=" hvr-bounce-to-right"><i
+                                    <li><a onclick="logout()" class=" hvr-bounce-to-right"><i
                                                 class="fa fa-sign-in nav_icon"></i>Signin</a></li>
-                                    <li><a href="signup.html" class=" hvr-bounce-to-right"><i
-                                                class="fa fa-sign-in nav_icon"></i>Singup</a></li>
+                                   
                                 </ul>
                             </li>
                         </ul>
@@ -191,13 +170,13 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 <!--//banner-->
                 <!--faq-->
                 <div class="blank">
-<!-- 
+                    <!-- 
                     <div class="blank-page">
                     <h3 style="text-align: center;">Approaches</h3>
 
                     </div> -->
                     <div class="blank-page row" id="approach" style="margin-top: 2.5rem;">
-                        
+
 
                     </div>
                 </div>
@@ -217,12 +196,35 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
     <!--scrolling js-->
     <script src="js/jquery.nicescroll.js"></script>
     <script src="js/scripts.js"></script>
+    <script src="js/server.js"></script>
+	<script src="js/session.js"></script>
+	<script>
+
+		if (isLoggedIn) {
+			headers = {
+				authorization: `Bearer ${JSON.parse(isLoggedIn)}`,
+				'Content-Type': 'application/json;charset=UTF-8',
+			}
+			// console.log(headers)
+		} else {
+			window.location.replace("signin.html")
+		}
+
+
+	</script>
 
 
     <script>
         onload = async function () {
 
-            await fetch("js/services.json")
+           
+			var url = `${serverurl}/api/v1/approach/`
+			// console.log(data)
+			fetch(url, {
+				method: 'GET',  // body: JSON.stringify(),
+				headers,
+
+			})
                 .then((res) => {
                     return res.json();
                 })
@@ -242,12 +244,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     // console.log(approachesProperty)
 
                     approahesDisplayed.map((vals) => {
-console.log(vals.bimg)
+                        console.log(vals.images[0].url)
                         dataApproach += ` 
 
                         <div class="col-md-4 chart-layer1-right" style="margin-top: 2.5rem">
                             <div class="user-marorm">
-                                <div class="malorum-top" style="background: url(..${vals.bimg})no-repeat;background-size:cover;
+                                <div class="malorum-top" style="background: url(${vals.images[0].url})no-repeat;background-size:cover;
                         min-height: 158px;">
                                 </div>
                                 <div class="malorm-bottom">
@@ -257,7 +259,7 @@ console.log(vals.bimg)
                                         <li><a href="edit/${vals.id}"><i class="fa fa-edit"> </i>
                                                 <div class="tooltip"><span>Edit</span></div>
                                             </a></li>
-                                        <li><a href="delete/${vals.id}"><i class="fa fa-trash-o"> </i>
+                                        <li><a href="process.html?approach=${vals._id}"><i class="fa fa-trash-o"> </i>
                                                 <div class="tooltip"><span>Delete</span></div>
                                             </a></li>
                                        
