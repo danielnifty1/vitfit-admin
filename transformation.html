@@ -89,7 +89,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
 						<li>
-							<a href="inbox.html" class=" hvr-bounce-to-right"><i class="fa fa-inbox nav_icon"></i>
+							<a href="appoitments.html" class=" hvr-bounce-to-right"><i class="fa fa-inbox nav_icon"></i>
 								<span class="nav-label">Appoitments</span> </a>
 						</li>
 
@@ -174,9 +174,9 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						<div class="form-group">
 							<!-- <label class="col-md-2 control-label">Select Image</label> -->
 							<div class="col-md-8 col-sm-12 col-xs-6 col-xs-push-2 col-md-push-2 col-sm-push-7 mt-20">
-								<input onchange="readFiles()" multiple="true" accept="image/jpeg,image/png" type="file"
+								<input onchange="readFiles()" required  accept="image/jpeg,image/png" type="file"
 									id="file-upload" class="form-condtrol1 mt-10" style="margin-bottom: 10px;">
-								<button type="submit" class=" btn btn-info btn-sm ">Add</button>
+									<button  type="submit" id="exampleInputFile" class="form-condhtrol1">Add <span id="loaded" style="display: none;" class="fa fa-spin fa-spinner"></span> </button>
 
 							</div>
 
@@ -349,7 +349,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 		formprop.addEventListener('submit', event => {
 			event.preventDefault();
-
+			loaded.style.display=""
 			const image = document.getElementById('theStream').value;
 
 
@@ -373,14 +373,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 						throw data
 
 					}
-
+loaded.style.display="none"
 					document.getElementById("msg").innerHTML = data.message
 					document.getElementById("transbutton").click();
 
 					formprop.reset()
 				})
 				.catch(error => {
-
+loaded.style.display="none"
 					document.getElementById("msg").innerHTML = error.Error ? error.Error : "Network error";
 					if (error && error.status == 403 || error.Error === "Token is expired" || error.status == 401) {
 						document.getElementById("msg").innerHTML = error.Error ? error.Error : "Login Again";

@@ -88,6 +88,18 @@ var url = `${serverurl}/api/v1/user/delete/${member}`
 					location.replace('members.html')
 				})}
 
+                       
+                if(urlParams.get('program')){
+const program = urlParams.get('program')
+console.log(program)
+var url = `${serverurl}/api/v1/program/delete/${program}`
+			fetch(url, {
+				method: 'Get',  // body: JSON.stringify(),
+				headers,
+			}).then((res) => {
+					location.replace('programs.html')
+				})}
+
         </script>
     </body>
 </html>

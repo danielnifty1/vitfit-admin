@@ -95,7 +95,7 @@
     
     
                                 <li>
-                                    <a href="inbox.html" class=" hvr-bounce-to-right"><i class="fa fa-inbox nav_icon"></i>
+                                    <a href="appoitments.html" class=" hvr-bounce-to-right"><i class="fa fa-inbox nav_icon"></i>
                                         <span class="nav-label">Appoitments</span> </a>
                                 </li>
     
@@ -195,12 +195,20 @@
         <!--scrolling js-->
         <script src="js/jquery.nicescroll.js"></script>
         <script src="js/scripts.js"></script>
+        <script src="js/server.js"></script>
+	<script src="js/session.js"></script>
     
     
         <script>
             onload = async function () {
     
-                await fetch("js/programs.json")
+                var url = `${serverurl}/api/v1/program/`
+			// console.log(data)
+			fetch(url, {
+				method: 'GET',  // body: JSON.stringify(),
+				headers,
+
+			})
                     .then((res) => {
                         return res.json();
                     })
@@ -220,22 +228,20 @@
                         // console.log(approachesProperty)
     
                         approahesDisplayed.map((vals) => {
-    console.log(vals.bimg)
+    // console.log(vals.bimg)
                             dataApproach += ` 
     
                             <div class="col-md-6 chart-layer1-right" style="margin-top: 2.5rem">
                                 <div class="user-marorm">
-                                    <div class="malorum-top" style="background: url(..${vals.bimg})no-repeat;background-size:cover;
+                                    <div class="malorum-top" style="background: url(${vals.images[0].url})no-repeat;background-size:cover;
                             min-height: 158px;">
                                     </div>
                                     <div class="malorm-bottom">
                                         <h2>${vals.title}</h2>
                                         <p>${vals.note} </p>
                                         <ul class="malorum-icons">
-                                            <li><a href="edit/${vals.id}"><i class="fa fa-edit"> </i>
-                                                    <div class="tooltip"><span>Edit</span></div>
-                                                </a></li>
-                                            <li><a href="delete/${vals.id}"><i class="fa fa-trash-o"> </i>
+                                            
+                                            <li><a href="process.html?program=${vals._id}"><i class="fa fa-trash-o"> </i>
                                                     <div class="tooltip"><span>Delete</span></div>
                                                 </a></li>
                                            

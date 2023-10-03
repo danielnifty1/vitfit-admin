@@ -88,7 +88,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
                             <li>
-                                <a href="inbox.html" class=" hvr-bounce-to-right"><i class="fa fa-inbox nav_icon"></i>
+                                <a href="appoitments.html" class=" hvr-bounce-to-right"><i class="fa fa-inbox nav_icon"></i>
                                     <span class="nav-label">Appoitments</span> </a>
                             </li>
 
@@ -180,7 +180,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                             <span class="input-group-addon">
                                                 <i class="fa fa-th"></i>
                                             </span>
-                                            <input type="text" class="form-control1" id="title" name="title" placeholder="Title">
+                                            <input required type="text" class="form-control1" id="title" name="title" placeholder="Title">
                                         </div>
                                     </div>
                                 </div>
@@ -189,7 +189,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <div class="col-md-8">
                                         <div class="input-group">
                                            
-                                            <textarea id="first_note" class="form-control1" id="note" name="note"></textarea>
+                                            <textarea required id="first_note" class="form-control1" id="note" name="note"></textarea>
                                           
                                         </div>
                                     </div>
@@ -200,7 +200,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <div class="col-md-8">
                                         <div class="input-group">
                                            
-                                            <textarea id="second_note" class="form-control1" id="note" name="note"></textarea>
+                                            <textarea id="second_note" class="form-control1" id="note" name="note" required></textarea>
                                           
                                         </div>
                                     </div>
@@ -212,7 +212,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <div class="form-group">
                                     <label class="col-md-2 control-label">Select Image</label>
                                     <div class="col-md-8">
-                                    <input type="file" id="file-upload" onchange="readFiles()"  accept="image/jpeg,image/png"  class="form-condtrol1"  name="images">
+                                    <input type="file" required id="file-upload" onchange="readFiles()"  accept="image/jpeg,image/png"  class="form-condtrol1"  name="images">
                                     <p class="help-block">Example block-level help text here.</p>
                                 </div>
                                 </div>
@@ -220,7 +220,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <div class="form-group">
                                    
                                     <div class="col-md-8 col-md-push-5">
-                                    <input type="submit" id="exampleInputFile" class="form-condhtrol1" id="exampleInputPassword1">
+                                        <button  type="submit" id="exampleInputFile" class="form-condhtrol1">submit <span id="loader" style="display: none;" class="fa fa-spin fa-spinner"></span> </button>
                                     
                                 </div>
                                 </div>
@@ -313,7 +313,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         formprop.addEventListener('submit', event => {
             event.preventDefault();
 
-                        // submitbtnbefore.style.display="none";
+                        loader.style.display="";
                         // submitbtnafter.style.display="block";
 
           
@@ -346,7 +346,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 }).then(res => res.json())
                     .then(data => {
                         console.log(data)
-                        // submitbtnbefore.style.display="none";
+                        loader.style.display="none";
                         // submitbtnafter.style.display="block";
                         
                         // ("msg").innerHTML = ;
@@ -355,17 +355,17 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                             console.log("not auth")
                             throw data
                         //     submitbtnbefore.style.display="block";
-                        // submitbtnafter.style.display="none";
+                        loader.style.display="none";
                         }
                         document.getElementById("msg").innerHTML = data.message;
                         // alert("Successfully added property")
                         // submitbtnbefore.style.display="block";
-                        // submitbtnafter.style.display="none";
+                        loader.style.display="none";
                         formprop.reset()
                     })
                     .catch(error => {
                         // submitbtnbefore.style.display="block";
-                        // submitbtnafter.style.display="none";
+                        loader.style.display="none";
                         console.log(error)
                         document.getElementById("msg").innerHTML = error.Error?error.Error:"Network error";
                         if (error && error.status == 403 || error.Error === "Token is expired" || error.status == 401) {

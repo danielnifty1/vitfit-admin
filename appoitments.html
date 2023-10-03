@@ -162,7 +162,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <i class="fa fa-angle-right"></i>
                         <span>Blank</span>
                     </h2>
-                    <h3 style="text-align: center;">Members</h3>
+                    <h3 style="text-align: center;">Appointments<h3>
 
                 </div>
                 <!--//banner-->
@@ -172,10 +172,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         <div class="tab-pane active text-style" id="tab1">
                             <div class="inbox-right">
 
-                                <div class="mailbox-content">
+                                <div class="mailbox-content" style="height: 700px !important; overflow-y: scroll; ">
                                     
-                                    <table class="table">
-                                        <tbody id="result">
+                                    <table class="table" >
+                                        <tbody id="result" >
                                             <tr class="table-row">
                                                 <td class="table-img">
                                                     <img src="images/in.jpg" alt="" />
@@ -450,7 +450,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         onload = async function () {
 
            
-			var url = `${serverurl}/api/v1/user/`
+			var url = `${serverurl}/api/v1/appointment/get-all`
 			// console.log(data)
 			fetch(url, {
 				method: 'GET',  // body: JSON.stringify(),
@@ -462,7 +462,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 })
                 .then((completeservicedata) => {
 
-                    const info = completeservicedata.data
+                    const info = completeservicedata.data.reverse()
                     console.log(info)
                     const dispalyLenght = completeservicedata.data.length
                     let dataApproach = "";
@@ -471,32 +471,32 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     let approachesProperty = [...info]
                     console.log(info)
 
-                    const approahesDisplayed = approachesProperty.splice(approachesProperty.length - Math.round((approachesProperty.length / 1)), 6)
+                    const approahesDisplayed = approachesProperty.splice(approachesProperty.length - Math.round((approachesProperty.length / 1)), dispalyLenght)
                     const approahesDisplayed2 = approachesProperty.splice()
 
                     // console.log(approachesProperty)
 
                     approahesDisplayed.map((vals) => {
-                        // console.log(vals.images[0].url)
+                        // console.log(vals.images[0].url
+
+
 
                         dataApproach += `
                         
                         
                         <tr class="table-row">
-                                                <td class="table-img">
-                                                    <img src="images/in.jpg" alt="" />
-                                                </td>
+                                                
                                                 <td class="table-text">
-                                                    <h6> ${vals.first_name+" "+vals.last_name} </h6>
-                                                    <p>${vals.email}</p>
+                                                    <h6>Program: ${vals.title} </h6>
+                                                    <p>For: <span style="color:red">${vals.duration} Min<span></p>
                                                 </td>
                                                
                                                 <td class="march">
-                                                   ${vals.createdAt}
+                                                  Appointment Day <h4 style="color:green"> ${vals.appointment_time.day+"-"+vals.appointment_time.month+"-"+vals.appointment_time.year} </h4>
                                                 </td>
 
                                                 <td>
-                                                  <a href="process.html?member=${vals._id}">  <span class="fam">DELETE</span></a>
+                                                  <a href="view.html?appointmentid=${vals._id}&user=${vals.user}">  <span class="fam">View</span></a>
                                                 </td>   
 
                                                 <td>

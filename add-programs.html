@@ -88,7 +88,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
                             <li>
-                                <a href="inbox.html" class=" hvr-bounce-to-right"><i class="fa fa-inbox nav_icon"></i>
+                                <a href="appoitments.html" class=" hvr-bounce-to-right"><i class="fa fa-inbox nav_icon"></i>
                                     <span class="nav-label">Appoitments</span> </a>
                             </li>
 
@@ -180,7 +180,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                             <span class="input-group-addon">
                                                 <i class="fa fa-th"></i>
                                             </span>
-                                            <input type="text" class="form-control1" id="title" name="title" placeholder="Title">
+                                            <input type="text" class="form-control1" id="title" name="title" placeholder="Title" required
+                                            >
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group pt-10">
+                                    <label class="col-md-2 control-label">Program Cost</label>
+                                    <div class="col-md-8">
+                                        <div class="input-group">
+                                            <span class="input-group-addon">
+                                                <i class="fa fa-th"></i>
+                                            </span>
+                                            <input type="number" class="form-control1" id="cost" name="title" placeholder="Cost" required>
                                         </div>
                                     </div>
                                 </div>
@@ -189,7 +201,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <div class="col-md-8">
                                         <div class="input-group">
                                            
-                                            <textarea id="note" class="form-control1" id="note" name="note"></textarea>
+                                            <textarea id="note" class="form-control1" id="note" name="note" required></textarea>
                                           
                                         </div>
                                     </div>
@@ -199,7 +211,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <div class="form-group">
                                     <label class="col-md-2 control-label">Select Image</label>
                                     <div class="col-md-8">
-                                    <input type="file" id="file-upload" onchange="readFiles()"  accept="image/jpeg,image/png"  class="form-condtrol1"  name="images">
+                                    <input type="file" required id="file-upload" onchange="readFiles()"  accept="image/jpeg,image/png"  class="form-condtrol1"  name="images">
                                     <p class="help-block">Example block-level help text here.</p>
                                 </div>
                                 </div>
@@ -207,7 +219,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <div class="form-group">
                                    
                                     <div class="col-md-8 col-md-push-5">
-                                    <input type="submit" id="exampleInputFile" class="form-condhtrol1" id="exampleInputPassword1">
+                                        <button  type="submit" id="exampleInputFile" class="form-condhtrol1">submit <span id="loader" style="display: none;" class="fa fa-spin fa-spinner"></span> </button>
+                                   
                                     
                                 </div>
                                 </div>
@@ -300,13 +313,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         formprop.addEventListener('submit', event => {
             event.preventDefault();
 
-                        // submitbtnbefore.style.display="none";
-                        // submitbtnafter.style.display="block";
+                         loader.style.display="";
+                        
 
           
   
                 const note = document.getElementById("note").value
                 const title = document.getElementById("title").value
+                const cost = document.getElementById("cost").value
+
                 const file_upload = document.getElementById("file-upload"); 
               
                 const images = photos;
@@ -315,7 +330,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                        
                         title,
                         note,
-                        images
+                        images,
+                        cost
                     }]
                 console.log(data)
                 document.getElementById("msg").innerHTML = ""; 
@@ -336,10 +352,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         // console.log(data)
                         if (data && data.success == false) {
                             console.log("not auth")
+                         loader.style.display="none";
+
                             throw data
                         //     submitbtnbefore.style.display="block";
                         // submitbtnafter.style.display="none";
                         }
+                        loader.style.display="none";
+
                         document.getElementById("msg").innerHTML = data.message;
                         // alert("Successfully added property")
                         // submitbtnbefore.style.display="block";
@@ -347,9 +367,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         formprop.reset()
                     })
                     .catch(error => {
-                        // submitbtnbefore.style.display="block";
-                        // submitbtnafter.style.display="none";
+                  
                         console.log(error)
+                        loader.style.display="none";
+
                         document.getElementById("msg").innerHTML = error.Error?error.Error:"Network error";
                         if (error && error.status == 403 || error.Error === "Token is expired" || error.status == 401) {
                             sessionStorage.removeItem("ozubulu")

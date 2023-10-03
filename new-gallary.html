@@ -99,7 +99,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
                             <li>
-                                <a href="inbox.html" class=" hvr-bounce-to-right"><i class="fa fa-inbox nav_icon"></i>
+                                <a href="appoitments.html" class=" hvr-bounce-to-right"><i class="fa fa-inbox nav_icon"></i>
                                     <span class="nav-label">Appoitments</span> </a>
                             </li>
 
@@ -193,7 +193,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                             <span class="input-group-addon">
                                                 <i class="fa fa-th"></i>
                                             </span>
-                                            <input id="title" type="text" class="form-control1"
+                                            <input required id="title" type="text" class="form-control1"
                                                 placeholder="Image Title">
                                         </div>
                                     </div>
@@ -203,7 +203,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                     <div class="col-md-8">
                                         <div class="input-group">
 
-                                            <textarea class="form-control1" id="note"></textarea>
+                                            <textarea class="form-control1" id="note" required></textarea>
 
                                         </div>
                                     </div>
@@ -213,7 +213,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <div class="form-group">
                                     <label class="col-md-2 control-label">File input</label>
                                     <div class="col-md-8">
-                                        <input type="file" accept="image/jpeg,image/png" id="file-upload"
+                                        <input required type="file" accept="image/jpeg,image/png" id="file-upload"
                                             class="form-condtrol1">
                                         <p class="help-block">Example block-level help text here.</p>
                                     </div>
@@ -222,7 +222,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <div class="form-group">
 
                                     <div class="col-md-8 col-md-push-5">
-                                        <input type="submit" id="exampleInputFile" class="form-condhtrol1">
+                                        <button  type="submit" id="exampleInputFile" class="form-condhtrol1">submit <span id="loader" style="display: none;" class="fa fa-spin fa-spinner"></span> </button>
 
                                     </div>
                                 </div>
@@ -288,7 +288,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
         formprop.addEventListener('submit', event => {
             event.preventDefault();
-
+loader.style.display=""
             const image = document.getElementById('theStream').value;
             const title = document.getElementById('title').value;
 
@@ -321,11 +321,11 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                     document.getElementById("msg").innerHTML = data.message
                     document.getElementById("transbutton").click();
-
+                    loader.style.display="none"
                     formprop.reset()
                 })
                 .catch(error => {
-
+                    loader.style.display="none"
                     document.getElementById("msg").innerHTML = error.Error ? error.Error : "Network error";
                     if (error && error.status == 403 || error.Error === "Token is expired" || error.status == 401) {
                         document.getElementById("msg").innerHTML = error.Error ? error.Error : "Login Again";
