@@ -43,7 +43,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			</div>
 			<div class="col-md-6 login-do">
 				<label class="hvr-shutter-in-horizontal login-sub">
-					<input type="submit" id="login" value="login">
+					<button  type="submit" id="exampleInputFile" class="form-control1">submit <span id="loader" style="display: none;" class="fa fa-spin fa-spinner"></span> </button>
 					</label>
 					 
 			</div>
@@ -68,28 +68,14 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 		const formprop = document.querySelector('#form');
 	
 		formprop.addEventListener('submit',event =>{
+			loader.style.display="";
+
 			event.preventDefault();
 
 
 	
 			const formData  = new FormData(formprop );
-			// const data = new URLSearchParams(formData);
-
-
-			// const email = document.getElementById("email").value;
-			// const password = document.getElementById("password").value;
-
-
-
-
-			// const data = {
-			// 		email,
-            //         password
-                    
-            //     }
-
-
-			// const formData  = new FormData(formprop );
+		
         const data = new URLSearchParams(formData);
 
 
@@ -100,16 +86,19 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 			   
 			}).then(res=>res.json())
 			.then(data =>{
+				loader.style.display="none";
 				
 				console.log(data)
 			if(data.access_token){
 document.getElementById("msg").innerHTML = data.message;
+loader.style.display="none";
 
 				sessionStorage.setItem("ozubulu",JSON.stringify(data.access_token))
 				// console.log(sessionStorage.getItem("ozubulu"))
 				window.location.replace("transformation.html")
 			}else{
 				// console.log(data)
+				loader.style.display="none";
 
 document.getElementById("msg").innerHTML = data.Error;
 msg.style.color="red";
