@@ -219,7 +219,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <div class="form-group">
                                    
                                     <div class="col-md-8 col-md-push-5">
-                                        <button  type="submit" id="exampleInputFile" class="form-condhtrol1">submit <span id="loader" style="display: none;" class="fa fa-spin fa-spinner"></span> </button>
+                                        <button  type="submit" id="exampleInputFile" class="form-condhtrol1">submit <span id="loader" style="display: none; "   class="fa fa-spin fa-spinner"></span> </button>
                                    
                                     
                                 </div>
@@ -311,9 +311,12 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
         formprop.addEventListener('submit', event => {
+
             event.preventDefault();
 
                          loader.style.display="";
+
+                         exampleInputFile.setAttribute("disabled", "true");
                         
 
           
@@ -353,12 +356,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         if (data && data.success == false) {
                             console.log("not auth")
                          loader.style.display="none";
+                         exampleInputFile.removeAttribute('disabled')
+
+
 
                             throw data
                         //     submitbtnbefore.style.display="block";
                         // submitbtnafter.style.display="none";
                         }
                         loader.style.display="none";
+                        exampleInputFile.removeAttribute('disabled')
+
+
 
                         document.getElementById("msg").innerHTML = data.message;
                         // alert("Successfully added property")
@@ -370,6 +379,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                   
                         console.log(error)
                         loader.style.display="none";
+                        exampleInputFile.removeAttribute('disabled')
+
 
                         document.getElementById("msg").innerHTML = error.Error?error.Error:"Network error";
                         if (error && error.status == 403 || error.Error === "Token is expired" || error.status == 401) {
