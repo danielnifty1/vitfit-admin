@@ -266,11 +266,18 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                     if (target[i] && target[i].type.startsWith("image")) {
                         imageData.readAsDataURL(target[i]);
 
+                        if(photos.length<1){
+
+                        
                         imageData.onload = (e) => {
-                            console.log(e.target.result)
+                            // console.log(e.target.result)
                             photos.push(e.target.result)
                         };
+                    }else{
+                        photos[photos.indexOf(photos[0].value)] = e.target.result
+                        // photos.splice(0, deleteCount, item1)
 
+                    }
                         imageData.onloadend = () => {
 
                             return resolve({
@@ -287,7 +294,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
             })
-            console.log(photos)
+            console.log(photos[0].value)
 
 
 
@@ -309,7 +316,15 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                 const title = document.getElementById("title").value
                 const file_upload = document.getElementById("file-upload"); 
               
-                const images = photos;
+                // if(photos.length>1){
+                // const images = photos[photos.length-1];
+
+                // }else{
+                // const images = photos[0];
+
+                // }
+                const images = photos[0].value;
+                
 
                     const data = [{
                        
@@ -322,43 +337,43 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             //    var url="https://dynamicserver.onrender.com/api/v1/property"
             var url=`${serverurl}/api/v1/approach/create`
 
-                fetch(url, {
-                    method: 'POST',  // body: JSON.stringify(),
-                    headers,
-                    body: JSON.stringify(data),
+                // fetch(url, {
+                //     method: 'POST',  // body: JSON.stringify(),
+                //     headers,
+                //     body: JSON.stringify(data),
 
-                }).then(res => res.json())
-                    .then(data => {
-                        console.log(data)
-                        loader.style.display="none";
+                // }).then(res => res.json())
+                //     .then(data => {
+                //         console.log(data)
+                //         loader.style.display="none";
                         
                         
-                        // ("msg").innerHTML = ;
-                        // console.log(data)
-                        if (data && data.success == false) {
-                            console.log("not auth")
-                            throw data
-                        //     submitbtnbefore.style.display="block";
-                        loader.style.display="none";
-                        }
-                        document.getElementById("msg").innerHTML = data.message;
-                        // alert("Successfully added property")
-                        // submitbtnbefore.style.display="block";
-                        // submitbtnafter.style.display="none";
-                        formprop.reset()
-                    })
-                    .catch(error => {
-                        // submitbtnbefore.style.display="block";
-                        loader.style.display="none";
-                        console.log(error)
-                        document.getElementById("msg").innerHTML = error.Error?error.Error:"Network error";
-                        if (error && error.status == 403 || error.Error === "Token is expired" || error.status == 401) {
-                            sessionStorage.removeItem("ozubulu")
-                            location.replace("signin.html")
+                //         // ("msg").innerHTML = ;
+                //         // console.log(data)
+                //         if (data && data.success == false) {
+                //             console.log("not auth")
+                //             throw data
+                //         //     submitbtnbefore.style.display="block";
+                //         loader.style.display="none";
+                //         }
+                //         document.getElementById("msg").innerHTML = data.message;
+                //         // alert("Successfully added property")
+                //         // submitbtnbefore.style.display="block";
+                //         // submitbtnafter.style.display="none";
+                //         formprop.reset()
+                //     })
+                //     .catch(error => {
+                //         // submitbtnbefore.style.display="block";
+                //         loader.style.display="none";
+                //         console.log(error)
+                //         document.getElementById("msg").innerHTML = error.Error?error.Error:"Network error";
+                //         if (error && error.status == 403 || error.Error === "Token is expired" || error.status == 401) {
+                //             sessionStorage.removeItem("ozubulu")
+                //             location.replace("signin.html")
                            
-                        }
-                    }
-                    )
+                //         }
+                //     }
+                    // )
             
         })
     </script>
