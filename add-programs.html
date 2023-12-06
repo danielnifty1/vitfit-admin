@@ -268,24 +268,24 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
  
 
 
-        let photos = [];
+        const photos = [];
 
-        function reset(){
-            // console.log ("reset clicked")
-            fileupload.removeAttribute('disabled')
-            fileupload.val("")
+        // function reset(){
+        //     // console.log ("reset clicked")
+        //     fileupload.removeAttribute('disabled')
+        //     fileupload.val("")
 
-            photos =[]
-            console.log (photos)
+        //     photos =[]
+        //     console.log (photos)
 
-            return photos
+        //     return photos
 
 
-        }
+        // }
 
         const readFiles = async () => {
             fileupload.setAttribute("disabled", "true");
-            resetimage.style.display=""
+            // resetimage.style.display=""
 
             await new Promise(async (resolve, reject) => {
 
@@ -349,13 +349,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                 const file_upload = document.getElementById("file-upload"); 
 
-                if(photos.length>1)
-                images = photos[photos.length-1];
-
-                else
-                images = photos[0];
-
-                console.log(images)
+                
                     // return images
                 // }else{
                 // const images = photos[0];
@@ -365,7 +359,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
                 // }
               
-                // const images = photos;
+                const images = photos;
 
                     const data = [{
                        
@@ -408,6 +402,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
 
 
                         document.getElementById("msg").innerHTML = data.message;
+            fileupload.removeAttribute("disabled", "true");
+
                         // alert("Successfully added property")
                         // submitbtnbefore.style.display="block";
                         // submitbtnafter.style.display="none";
