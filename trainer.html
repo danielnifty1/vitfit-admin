@@ -220,10 +220,10 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
             </div>
         </div>
         <div class="clearfix"> </div>
-        <img id="img" style="display: none;">
+        <img id="img" style="display: nodne;">
         <textarea id="theStream" style="display:none ;"></textarea>
         <input id="_id" >
-        <button id="transbutton" onclick="loader()"></button>
+        <button id="transbutton" onclick="loader()">fff</button>
     </div>
 
     <!---->
@@ -305,13 +305,15 @@ console.log(image)
 
 					if (data && data.success == false) {
 						// throw "data"
-                        console.log("done")
+                        console.log(data)
                         
                         loader.style.display="none";
 					// document.getElementById("msg").innerHTML = "done"
 
 
 					}
+                    console.log(data)
+
 					document.getElementById("msg").innerHTML = "done"
 					document.getElementById("transbutton").click();
                     loader.style.display="none";
