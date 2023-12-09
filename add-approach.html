@@ -199,7 +199,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <div class="form-group">
                                     <label class="col-md-2 control-label">Select Image</label>
                                     <div class="col-md-8">
-                                    <input type="file" id="file-upload" onchange="readFiles()"  accept="image/jpeg,image/png"  class="form-condtrol1"  name="images">
+                                    <input type="file" id="fileupload" onchange="readFiles()"  accept="image/jpeg,image/png"  class="form-condtrol1"  name="images">
                                     <p class="help-block">Example block-level help text here.</p>
                                 </div>
                                 </div>
@@ -257,6 +257,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         const photos = [];
 
         const readFiles = async () => {
+            fileupload.setAttribute("disabled", "true");
+
             await new Promise(async (resolve, reject) => {
 
                 const target = event.target.files;
