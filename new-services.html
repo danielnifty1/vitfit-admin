@@ -212,7 +212,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                                 <div class="form-group">
                                     <label class="col-md-2 control-label">Select Image</label>
                                     <div class="col-md-8">
-                                    <input type="file" required id="file-upload" onchange="readFiles()"  accept="image/jpeg,image/png"  class="form-condtrol1"  name="images">
+                                    <input type="file" required id="fileupload" onchange="readFiles()"  accept="image/jpeg,image/png"  class="form-condtrol1"  name="images">
                                     <p class="help-block">Example block-level help text here.</p>
                                 </div>
                                 </div>
@@ -270,6 +270,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
         const photos = [];
 
         const readFiles = async () => {
+            fileupload.setAttribute("disabled", "true");
+
             await new Promise(async (resolve, reject) => {
 
                 const target = event.target.files;
@@ -348,6 +350,7 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         console.log(data)
                         loader.style.display="none";
                         // submitbtnafter.style.display="block";
+                        exampleInputFile.removeAttribute('disabled')
                         
                         // ("msg").innerHTML = ;
                         // console.log(data)
@@ -358,6 +361,8 @@ Smartphone Compatible web template, free webdesigns for Nokia, Samsung, LG, Sony
                         loader.style.display="none";
                         }
                         document.getElementById("msg").innerHTML = data.message;
+                        exampleInputFile.removeAttribute('disabled')
+
                         // alert("Successfully added property")
                         // submitbtnbefore.style.display="block";
                         loader.style.display="none";
